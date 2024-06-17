@@ -22,9 +22,13 @@ add_executable(green_app ${GREEN_APP_EXECUTABLE} ${APP_RESOURCES})
 
 target_link_libraries(green_app
     green_utils
+    stb
 )
 
 target_include_directories(green_app PUBLIC ${CMAKE_CURRENT_LIST_DIR}/src)
+
+target_compile_definitions(green_app PUBLIC -DGREEN_PATH_TO_RES_DIRECTORY="${CMAKE_CURRENT_LIST_DIR}/res")
+target_compile_definitions(green_app PUBLIC -DGREEN_PATH_TO_OUT_DIRECTORY="${CMAKE_CURRENT_LIST_DIR}/out")
 
 if(APPLE)
     set(APP_BUNDLE_NAME "Green app.") # This name can contain up to 15 characters according to Apple's documentation

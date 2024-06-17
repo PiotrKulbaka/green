@@ -4,8 +4,24 @@ set(GREEN_UTILS_SOURCES
     ${CMAKE_CURRENT_LIST_DIR}/green/utils/glad/include/KHR/khrplatform.h
     ${CMAKE_CURRENT_LIST_DIR}/green/utils/glad/src/glad.c
 
+    # glfw utils
     ${CMAKE_CURRENT_LIST_DIR}/green/utils/glfw/glfw_window.hpp
     ${CMAKE_CURRENT_LIST_DIR}/green/utils/glfw/glfw_window.cpp
+
+    # opengl
+    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_frame_surface_handler.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_frame_surface_handler.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_program.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_program.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_texture.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_texture.hpp
+
+    # utils
+    ${CMAKE_CURRENT_LIST_DIR}/green/utils/log.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/green/utils/log.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/green/utils/noncopyable.hpp
 )
 
 add_library(green_utils STATIC ${GREEN_UTILS_SOURCES})

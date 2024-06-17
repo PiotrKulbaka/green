@@ -1,3 +1,9 @@
 [submodule "src/third/glfw"]
 	path = src/third/glfw
 	url = git@github.com:glfw/glfw.git
+[submodule "src/third/glm"]
+	path = src/third/glm
+	url = git@github.com:g-truc/glm.git
+[submodule "src/third/stb/stb"]
+	path = src/third/stb/stb
+	url = git@github.com:nothings/stb.git
