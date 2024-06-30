@@ -23,6 +23,7 @@ add_executable(green_app ${GREEN_APP_EXECUTABLE} ${APP_RESOURCES})
 target_link_libraries(green_app
     green_utils
     stb
+    glm
 )
 
 target_include_directories(green_app PUBLIC ${CMAKE_CURRENT_LIST_DIR}/src)

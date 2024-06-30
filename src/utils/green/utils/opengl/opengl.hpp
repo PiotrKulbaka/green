@@ -4,6 +4,7 @@
 
 #include <glad/glad.h>
 #include <cassert>
+#include <cstdint>
 
 namespace green::utils
 {

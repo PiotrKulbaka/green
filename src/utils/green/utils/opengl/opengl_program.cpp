@@ -184,11 +184,12 @@ namespace green::utils
         return -1;
     }
 
-    /* opengl_program::set_uniform_texture_unit */
-    void opengl_program::set_uniform_texture_unit(int32_t uniform, uint32_t texture_unit_index) const
+    /* opengl_program::set_uniform_texture */
+    void opengl_program::set_uniform_texture(int32_t uniform, uint32_t texture, uint32_t unit) const
     {
-        GL_CALL(glActiveTexture(GL_TEXTURE0 + texture_unit_index));
-        GL_CALL(glUniform1i(uniform, texture_unit_index));
+        GL_CALL(glActiveTexture(GL_TEXTURE0 + unit));
+        GL_CALL(glBindTexture(GL_TEXTURE_2D, texture));
+        GL_CALL(glUniform1i(uniform, unit));
     }
 
     /* opengl_program::set_uniform_vec2 */
