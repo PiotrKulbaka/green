@@ -120,6 +120,80 @@ namespace
         }
     }
 
+    const char* source_string(GLenum source)
+    {
+        switch (source) {
+            case GL_DEBUG_SOURCE_API:
+                return "API";
+            case GL_DEBUG_SOURCE_WINDOW_SYSTEM:
+                return "Window System";
+            case GL_DEBUG_SOURCE_SHADER_COMPILER:
+                return "Shader Compiler";
+            case GL_DEBUG_SOURCE_THIRD_PARTY:
+                return "Source: Third Party";
+            case GL_DEBUG_SOURCE_APPLICATION:
+                return "Application";
+            case GL_DEBUG_SOURCE_OTHER:
+                return "Other";
+            default:
+                return "unknown";
+        }
+    }
+
+    const char* type_string(GLenum type)
+    {
+        switch (type) {
+            case GL_DEBUG_TYPE_ERROR:
+                return "Error";
+            case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:
+                return"Deprecated Behaviour";
+            case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:
+                return "Undefined Behaviour";
+            case GL_DEBUG_TYPE_PORTABILITY:
+                return "Portability";
+            case GL_DEBUG_TYPE_PERFORMANCE:
+                return "Performance";
+            case GL_DEBUG_TYPE_MARKER:
+                return "Marker";
+            case GL_DEBUG_TYPE_PUSH_GROUP:
+                return "Push Group";
+            case GL_DEBUG_TYPE_POP_GROUP:
+                return "Pop Group";
+            case GL_DEBUG_TYPE_OTHER:
+                return "Other";
+            default:
+                return "unknown";
+        }
+    }
+
+    const char* severity_string(GLenum severity)
+    {
+        switch (severity)
+        {
+            case GL_DEBUG_SEVERITY_HIGH:
+                return "high";
+            case GL_DEBUG_SEVERITY_MEDIUM:
+                return "medium";
+            case GL_DEBUG_SEVERITY_LOW:
+                return "low";
+            case GL_DEBUG_SEVERITY_NOTIFICATION:
+                return "notification";
+            default:
+                return "unknown";
+        }
+    }
+
+    void APIENTRY debug_output(GLenum src, GLenum type, unsigned int id, GLenum severity, GLsizei len, const char* msg, const void*)
+    {
+        if (id == 131169 || id == 131185 || id == 131218 || id == 131204) {
+            return;
+        }
+        const auto* ssrc = source_string(src);
+        const auto* stype = type_string(type);
+        const auto* ssev = severity_string(severity);
+        fprintf(stderr, "[OpenGL_debug][%d][%s][%s][%s]: %s\n", id, ssev, ssrc, stype, msg);
+    }
+
 } // namespace
 
 namespace green::utils
@@ -140,6 +214,7 @@ namespace green::utils
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+        glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 
         glfwWindowHint(GLFW_RED_BITS, 8);
         glfwWindowHint(GLFW_GREEN_BITS, 8);
@@ -161,6 +236,15 @@ namespace green::utils
 
         glfwSetErrorCallback(glfw_error);
         glfwSwapInterval(0);
+
+        GLint flags;
+        glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
+        if (flags & GL_CONTEXT_FLAG_DEBUG_BIT) {
+            glEnable(GL_DEBUG_OUTPUT);
+            glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+            glDebugMessageCallback(debug_output, nullptr);
+            glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
+        }
 
         make_nothing_current();
     }

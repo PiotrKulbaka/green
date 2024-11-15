@@ -11,6 +11,20 @@ namespace green::utils
 
     void opengl_check_errors(const char* file, int line);
 
+    template <class T>
+    class opengl_object
+    {
+        static_assert(sizeof(T) == sizeof(GLint), "only OpenGL types available");
+    public:
+
+        T get_object_id() const noexcept
+        {
+            return m_object;
+        }
+    protected:
+        T m_object {0};
+    };
+
 }
 
 #if defined(_DEBUG) || defined(DEBUG) || true

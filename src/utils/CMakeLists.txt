@@ -11,16 +11,14 @@ set(GREEN_UTILS_SOURCES
     # opengl
     ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl.cpp
     ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_buffer_object.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_buffer_object.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_buffer.hpp
     ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_frame_surface_handler.cpp
     ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_frame_surface_handler.hpp
     ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_program.cpp
     ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_program.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_texture_object.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_texture_object.hpp
-    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_vertex_array_object.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_vertex_array_object.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_texture.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_vertex_array.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/green/utils/opengl/opengl_vertex_array.hpp
 
     # utils
     ${CMAKE_CURRENT_LIST_DIR}/green/utils/log.cpp

@@ -16,20 +16,27 @@ set(APP_RESOURCES ${CMAKE_CURRENT_SOURCE_DIR}/res/app.icns)
 # main
 set(GREEN_APP_EXECUTABLE
     ${CMAKE_CURRENT_LIST_DIR}/main/main.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/main/input_manager.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/main/input_manager.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/main/global_manager.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/main/resource_manager.hpp
+    ${CMAKE_CURRENT_LIST_DIR}/main/resource_manager.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/main/vertices.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/main/indices.cpp
 )
 
 add_executable(green_app ${GREEN_APP_EXECUTABLE} ${APP_RESOURCES})
 
 target_link_libraries(green_app
     green_utils
+    green_core
     stb
-    glm
 )
 
 target_include_directories(green_app PUBLIC ${CMAKE_CURRENT_LIST_DIR}/src)
 
-target_compile_definitions(green_app PUBLIC -DGREEN_PATH_TO_RES_DIRECTORY="${CMAKE_CURRENT_LIST_DIR}/res")
-target_compile_definitions(green_app PUBLIC -DGREEN_PATH_TO_OUT_DIRECTORY="${CMAKE_CURRENT_LIST_DIR}/out")
+target_compile_definitions(green_app PUBLIC -DRESOURCES_DIRECTORY="${CMAKE_CURRENT_LIST_DIR}/res")
+target_compile_definitions(green_app PUBLIC -DOUTPUT_DIRECTORY="${CMAKE_CURRENT_LIST_DIR}/out")
 
 if(APPLE)
     set(APP_BUNDLE_NAME "Green app.") # This name can contain up to 15 characters according to Apple's documentation

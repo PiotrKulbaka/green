@@ -1,51 +1,31 @@
 #pragma once
 
-#include <green/utils/noncopyable.hpp>
-#include <cstdint>
+#include <green/utils/opengl/opengl.hpp>
 
 namespace green::utils
 {
 
-    class opengl_program
+    class opengl_program : public opengl_object<GLuint>
     {
     public:
-        class builder : noncopyable
-        {
-        public:
-            builder();
-            ~builder();
+        opengl_program() = default;
+        ~opengl_program() = default;
 
-            builder& vertex_shader(const char* source);
-            builder& fragment_shader(const char* source);
+        void initialize(const char* vertex_shader_source, const char* fragment_shader_source) noexcept;
+        void finalize() noexcept;
 
-            opengl_program build();
-        private:
-            int32_t m_vertex_shader {0};
-            int32_t m_fragment_shader {0};
-        }; // class builder
+        void bind() const noexcept;
+        void unbind() const noexcept;
 
-    public:
-        opengl_program();
-        ~opengl_program();
+        GLint get_attribute_location(const char* name);
+        GLint get_uniform_location(const char* name);
 
-        void initialize(uint32_t program_id);
-        void finalize();
-
-        void use() const;
-        static void unuse();
-
-        int32_t get_program_id() const;
-        int32_t get_attribute_location(const char* name);
-        int32_t get_uniform_location(const char* name);
-
-        void set_uniform_texture(int32_t uniform, uint32_t texture, uint32_t unit) const;
-        void set_uniform_vec2(int32_t uniform, const float* const vec) const;
-        void set_uniform_vec4(int32_t uniform, const float* const vec) const;
-        void set_uniform_mat4(int32_t uniform, const float* const mat, bool transpose = false) const;
-        void set_uniform_int(int32_t uniform, int32_t val) const;
-
-    private:
-        int32_t m_program {0};
+        void set_uniform_texture(GLint uniform, GLuint texture, GLenum unit) const;
+        void set_uniform_vec2(GLint uniform, const float* const vec) const;
+        void set_uniform_vec4(GLint uniform, const float* const vec) const;
+        void set_uniform_mat3(GLint uniform, const float* const mat, bool transpose = false) const;
+        void set_uniform_mat4(GLint uniform, const float* const mat, bool transpose = false) const;
+        void set_uniform_int(GLint uniform, int32_t val) const;
     }; // class opengl_shader_program
 
 } // namespace green::utils
